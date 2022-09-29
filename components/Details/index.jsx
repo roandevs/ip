@@ -33,7 +33,7 @@ export default function Details(props){
                 <h3 className={styles['error-message']}>An error occurred with your query.</h3>
             </div>
             <div className='container text-center d-flex justify-content-center'>
-                <h5 className={styles['error-message']}>if you think this is a mistake then please contact an administrator. </h5>
+                <h5 className={styles['error-message']}>The provider may of refused to connect or your query may be invalid. Please try another provider or if you think this is a mistake then please contact an administrator. </h5>
             </div>
         </>
     );
