@@ -1,0 +1,21 @@
+#details{
+    margin-top:100px;
+}
+
+.result-header, .result-text{
+    color:white!important;
+    border-bottom:none!important;
+    white-space: nowrap;
+    float: center;
+    width:300px;
+    font-size: 18px;
+}
+
+.details-table{
+    width: 75%!important;
+}
+
+.error-message{
+    color:white;
+}
+
