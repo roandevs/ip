@@ -6,6 +6,9 @@
 
 - If you wish to use whatismyip.com as a provider, set API_KEY in your .env file to your api key you get from the site. It's free to register for one, but if you want to remove that provider altogether then remove it from ipScraper.js.
 
+- You can also test or use the production version of this code: https://ip.roanj.com.
+
+
 ## Features
 
 - Allows support to query multiple providers (found in ipScraper.js) for IP data 
