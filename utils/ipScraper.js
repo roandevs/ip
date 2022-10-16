@@ -22,63 +22,37 @@ const scrapers = {
     'NordVPN': async (ip) => {
         try{
             const getIpInfoReq = await axios.get(`https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data&ip=${ip}`);
-            return [
-                {
-                    'IP Address': getIpInfoReq.data.ip ? getIpInfoReq.data.ip : 'N/A',
-                    'Internet Service Provider': getIpInfoReq.data.isp ? getIpInfoReq.data.isp : 'N/A',
-                    'Country Code': getIpInfoReq.data.country_code ? getIpInfoReq.data.country_code : 'N/A',
-                   
-                },
-                {
-                    'Country': getIpInfoReq.data.country ? getIpInfoReq.data.country : 'N/A',
-                    'Region': getIpInfoReq.data.region ? getIpInfoReq.data.region : 'N/A',
-                    'Area Code': getIpInfoReq.data.area_code ? getIpInfoReq.data.area_code : 'N/A',
-                },
-                
-            ]
-        }
-        catch(e){
-            console.log(e);
-            return null;
-        }
-    },
-
-    'ipaddress.is': async (ip) => {
-        try{
-            const req = await axios.get(`https://ipaddress.is/${ip}`);
-            const getData = (data, field) => {
-                const splitContent = data.split(`<tr><td style="width:150px;">${field}</td><td>`);
-                if(splitContent[1]){
-                    const scrapedData = splitContent[1].split('</td></tr>');
-                    if(scrapedData[0]) return scrapedData[0];
-                }
-                return 'N/A';
+            return {
+                'desktopView': [
+                    {
+                        'IP Address': getIpInfoReq.data.ip ? getIpInfoReq.data.ip : 'N/A',
+                        'Internet Service Provider': getIpInfoReq.data.isp ? getIpInfoReq.data.isp : 'N/A',
+                        'Country Code': getIpInfoReq.data.country_code ? getIpInfoReq.data.country_code : 'N/A',
+                       
+                    },
+                    {
+                        'Country': getIpInfoReq.data.country ? getIpInfoReq.data.country : 'N/A',
+                        'Region': getIpInfoReq.data.region ? getIpInfoReq.data.region : 'N/A',
+                        'Area Code': getIpInfoReq.data.area_code ? getIpInfoReq.data.area_code : 'N/A',
+                    },
+                ],
+                'mobileView': [
+                    {
+                        'IP Address': getIpInfoReq.data.ip ? getIpInfoReq.data.ip : 'N/A',
+                    },
+                    {
+                        'Internet Service Provider': getIpInfoReq.data.isp ? getIpInfoReq.data.isp : 'N/A',
+                    },
+                    {
+                        'Country Code': getIpInfoReq.data.country_code ? getIpInfoReq.data.country_code : 'N/A',
+                        'Country': getIpInfoReq.data.country ? getIpInfoReq.data.country : 'N/A',
+                    },
+                    {
+                        'Region': getIpInfoReq.data.region ? getIpInfoReq.data.region : 'N/A',
+                        'Area Code': getIpInfoReq.data.area_code ? getIpInfoReq.data.area_code : 'N/A',
+                    }
+                ],
             }
-            const ipAddress = getData(req.data, 'IP Address');
-            const host = getData(req.data, 'Host');
-            const country = getData(req.data, 'Country');
-            const region = getData(req.data, 'Region');
-            const city = getData(req.data, 'City');
-            const postcode = getData(req.data, 'Postal Code');
-            const latitude = getData(req.data, 'Latitude').replace('&deg;', '°')
-            const longitude = getData(req.data, 'Longitude').replace('&deg;', '°')
-            return [
-                {
-                    'IP Address': ipAddress,
-                    'Host': host,
-                    'Country': country,
-                
-                },
-                {
-                    'Region': region,
-                    'City': city,
-                    'Postal Code': postcode,
-                },
-                {
-                    'Latitude': latitude,
-                    'Longitude': longitude,
-                },
-            ]
         }
         catch(e){
             console.log(e);
@@ -106,22 +80,41 @@ const scrapers = {
             const organization = getData(req.data, 'Organization');
             const isp = getData(req.data, 'Isp')
             const continent = getData(req.data, 'Continent')
-            return [
-                {
-                    'City': city,
-                    'Region': region,
-                    'Country': country,
-                    'Postal Code': postcode,
-                
-                },
-                {
-                    'Latitude,Longitude': coords,
-                    'Organization': organization,
-                    'ISP': isp,
-                    'Continent': continent,
-                },
-            ]
-        
+            return {
+                'desktopView':  [
+                    {
+                        'City': city,
+                        'Region': region,
+                        'Country': country,
+                        'Postal Code': postcode,
+                    
+                    },
+                    {
+                        'Latitude,Longitude': coords,
+                        'Organization': organization,
+                        'ISP': isp,
+                        'Continent': continent,
+                    },
+                ],
+                'mobileView':  [
+                    {
+                        'City': city,
+                        'Region': region,
+                    },
+                    {
+                        'Country': country,
+                        'Postal Code': postcode,
+                    },
+                    {
+                        'Latitude,Longitude': coords,
+                    },
+                    {'Organization': organization},
+                    {
+                        'ISP': isp,
+                        'Continent': continent,
+                    },
+                ]
+            }
         }
         catch(e){
             console.log(e);
@@ -141,25 +134,49 @@ const scrapers = {
                 }
                 return null;
             }
-            return [
-                {
-                    'IP Address': getData(req.data, 'ip'),
-                    'ASN': getData(req.data, 'asn'),
-                    'Country': getData(req.data, 'country'),
-                    'Region': getData(req.data, 'region'),
-                
-                },
-                {
-                    'City': getData(req.data, 'city'),
-                    'Postal Code': getData(req.data, 'postalcode'),
-                    'ISP': getData(req.data, 'isp'),
-                    'Time': getData(req.data, 'time'),
-                },
-                {
-                    'Latitude': getData(req.data, 'latitude'),
-                    'Longitude': getData(req.data, 'longitude'),
-                },
-            ]
+            return {
+                'desktopView': [
+                    {
+                        'IP Address': getData(req.data, 'ip'),
+                        'ASN': getData(req.data, 'asn'),
+                        'Country': getData(req.data, 'country'),
+                        'Region': getData(req.data, 'region'),
+                    
+                    },
+                    {
+                        'City': getData(req.data, 'city'),
+                        'Postal Code': getData(req.data, 'postalcode'),
+                        'ISP': getData(req.data, 'isp'),
+                        'Time': getData(req.data, 'time'),
+                    },
+                    {
+                        'Latitude': getData(req.data, 'latitude'),
+                        'Longitude': getData(req.data, 'longitude'),
+                    },
+                ],
+                'mobileView': [
+                    {
+                        'IP Address': getData(req.data, 'ip'),
+                        'ASN': getData(req.data, 'asn'),
+                        'Country': getData(req.data, 'country'),
+                    
+                    },{
+                        'Region': getData(req.data, 'region'),
+                    },
+                    {
+                        'City': getData(req.data, 'city'),
+                        'Postal Code': getData(req.data, 'postalcode'),
+                    },
+                    {
+                        'ISP': getData(req.data, 'isp'),
+                        'Time': getData(req.data, 'time'),
+                    },
+                    {
+                        'Latitude': getData(req.data, 'latitude'),
+                        'Longitude': getData(req.data, 'longitude'),
+                    },
+                ]
+            }
         }
         catch(e){
             console.log(e);

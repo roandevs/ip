@@ -42,11 +42,11 @@ export default class IP extends React.Component{
                     <meta name="description" content="An open-source, easy to use IP look up tool" />
                     <meta name="keywords" content={`ip, what is my ip, ip lookup, my ip`} />
                     <title>IP Address Lookup</title>
-                    <meta property="og:title" content={`${this.props.ipDetails[0]['IP Address']} - ${this.props.ipDetails[0]['Internet Service Provider']}`}/>
+                    <meta property="og:title" content={`${this.props.ipDetails.desktopView[0]['IP Address']} - ${this.props.ipDetails.desktopView[0]['Internet Service Provider']}`}/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:url" content="/"/>
                     <meta property="og:description" content={
-                        this.props.ipDetails.map((obj) => {
+                        this.props.ipDetails.desktopView.map((obj) => {
                             return Object.keys(obj).map((key) => {
                                 return `${key}: ${obj[key]}`
                             }).join(', ')

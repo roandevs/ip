@@ -1,5 +1,9 @@
-#details{
+#desktop-view-details{
     margin-top:100px;
+}
+#mobile-view-details{
+    margin-top:100px;
+    display:none;
 }
 
 .result-header, .result-text{
@@ -19,3 +23,21 @@
     color:white;
 }
 
+@media only screen and (max-width: 465px) {
+    #desktop-view-details{
+        display:none;
+    }
+    #mobile-view-details{
+        display:block;
+    }
+}
+
+@media only screen and (max-width: 310px) {
+    #desktop-view-details{
+        display:none;
+    }
+    #mobile-view-details{
+        display:block;
+        margin-left: 60px;
+    }
+}

@@ -44,3 +44,40 @@
 #search-provider-choice{
     margin-top:10px;
 }
+
+#mobile-view{
+    display:none;
+}
+
+@media only screen and (max-width: 991px) {
+    #search-btn{
+        margin-left: -99px;
+    }
+    #search-col{
+        margin-left: 120px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #search-col{
+        margin-left: 60px;
+        margin-right: 30px;
+    }
+}
+@media only screen and (max-width: 530px) {
+    #desktop-view{
+        display:none;
+    }
+    #mobile-view{
+        display:inline-block;
+        margin-left: -5%;
+    }
+    #search-header{
+        margin-left: 10px;
+    }
+    #search-btn{
+        margin-left: 0px;
+        margin-top:0px;
+    }
+
+}
+

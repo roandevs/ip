@@ -54,29 +54,58 @@ export default class Search extends React.Component{
     render(){
         return (
             <>
-                <div id={styles['search-header']} className='container text-center d-flex justify-content-center'>IP Address Lookup</div>
-                <Form onSubmit={this.queryIp.bind(this)}>
-                    <Container className='text-center d-flex justify-content-center'>
-                        <Row className="justify-content-md-center">
-                            <Col xs lg="5">
-                                <Form.Group className="mb-3" controlId="formIpAddress">
-                                    <Form.Label id={styles['search-label']} className="text-muted">Enter the IP address you're curious about:</Form.Label>
-                                    <Form.Control id={styles['search-input']} type="text" value={this.state.ip} onChange={this.updateQuery.bind(this)} />
-                                    <Form.Select onChange={this.updateScraper.bind(this)} id={styles['search-provider-choice']}>
-                                        {this.props.scrapers.map((scraper) => (
-                                            <option value={scraper}>Search with: {scraper}</option>
-                                        ))}
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                            <Col xs lg="3">
-                                <Button id={styles['search-btn']} variant="primary" type="submit">
-                                    Get IP Details
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Form>
+                <div id={styles['desktop-view']}>
+                    <div id={styles['search-header']} className='container text-center d-flex justify-content-center'>
+                        IP Address Lookup
+                    </div>
+                    <Form onSubmit={this.queryIp.bind(this)}>
+                        <Container className='text-center d-flex justify-content-center'>
+                            <Row className="justify-content-md-center">
+                                <Col xs lg="5" id={styles['search-col']}>
+                                    <Form.Group className="mb-3" controlId="formIpAddress">
+                                        <Form.Label id={styles['search-label']} className="text-muted">Enter the IP address you're curious about:</Form.Label>
+                                        <Form.Control id={styles['search-input']} type="text" value={this.state.ip} onChange={this.updateQuery.bind(this)} />
+                                        <Form.Select onChange={this.updateScraper.bind(this)} id={styles['search-provider-choice']}>
+                                            {this.props.scrapers.map((scraper) => (
+                                                <option value={scraper}>Search with: {scraper}</option>
+                                            ))}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col xs lg="3">
+                                    <Button id={styles['search-btn']} variant="primary" type="submit">
+                                        Get IP Details
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Form>
+                </div>
+                <div id={styles['mobile-view']}>
+                    <div id={styles['search-header']} className='container text-center d-flex justify-content-center'>
+                        IP Address Lookup
+                    </div>
+                    <Form onSubmit={this.queryIp.bind(this)}>
+                        <Container className='text-center d-flex justify-content-center'>
+                            <Row className="justify-content-md-center">
+                                <Col xs lg="5" id={styles['search-col']}>
+                                    <Form.Group className="mb-3" controlId="formIpAddress">
+                                        <Form.Label id={styles['search-label']} className="text-muted">Enter the IP address you're curious about:</Form.Label>
+                                        <Form.Control id={styles['search-input']} type="text" value={this.state.ip} onChange={this.updateQuery.bind(this)} />
+                                        <Form.Select onChange={this.updateScraper.bind(this)} id={styles['search-provider-choice']}>
+                                            {this.props.scrapers.map((scraper) => (
+                                                <option value={scraper}>Search with: {scraper}</option>
+                                            ))}
+                                        </Form.Select>
+                                    </Form.Group>
+                                    <Button id={styles['search-btn']} variant="primary" type="submit">
+                                        Get IP Details
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Form>
+                </div>
             </>
         )
     }
